@@ -2,7 +2,7 @@
   "name": "electron-create-react-app-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "description": "Boilerplate for making an electorn application with create-react-app",
+  "description": "Boilerplate for making an electron application with create-react-app",
   "author": "Will Olson <will.olson11@gmail.com>",
   "license": "MIT",
   "dependencies": {
