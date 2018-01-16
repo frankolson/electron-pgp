@@ -1,8 +1,8 @@
 {
-  "name": "electron-create-react-app-boilerplate",
+  "name": "electron-gpg",
   "version": "0.1.0",
   "private": true,
-  "description": "Boilerplate for making an electron application with create-react-app",
+  "description": "An app for working with GnuPG.",
   "author": "Will Olson <will.olson11@gmail.com>",
   "license": "MIT",
   "main": "src/electron-starter.js",

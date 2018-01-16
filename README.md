@@ -1,6 +1,6 @@
-# Electron `create-react-app` Boilerplate:
+# Electron GPG
 
-For bootstrapping electron projects with React and Webpack.
+An app for working with GnuPG.
 
 ## Getting Started
 
@@ -8,8 +8,8 @@ For bootstrapping electron projects with React and Webpack.
 
 ```shell
 cd ~/
-git clone https://github.com/frankolson/electron-create-react-app-boilerplate.git project-name
-cd project-name
+git clone https://github.com/frankolson/electron-gpg.git
+cd electron-gpg
 yarn
 yarn start
 ```
