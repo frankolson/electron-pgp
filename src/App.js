@@ -30,6 +30,10 @@ const Title = styled.h1`
   font-size: 1.5em;
 `
 
+const Splash = styled.span`
+  color: #61dafb;
+`
+
 const Intro = styled.p`
   font-size: large;
 `
@@ -39,7 +43,7 @@ class App extends Component {
     return (
       <AppContainer>
         <Header>
-          <Title>Welcome to ElectronGPG</Title>
+          <Title>Welcome to Electron<Splash>GPG</Splash></Title>
         </Header>
 
         <Intro>
