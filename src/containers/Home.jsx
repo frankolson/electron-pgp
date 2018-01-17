@@ -33,7 +33,7 @@ class Home extends Component {
     return (
       <HomeContainer>
         <Header>
-          <Title>Welcome to Electron<Splash>GPG</Splash></Title>
+          <Title>Welcome to Electron<Splash>PGP</Splash></Title>
         </Header>
 
         <Intro>

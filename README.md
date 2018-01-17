@@ -1,4 +1,4 @@
-# Electron GPG
+# Electron PGP
 
 An app for working with GnuPG.
 
@@ -8,8 +8,8 @@ An app for working with GnuPG.
 
 ```shell
 cd ~/
-git clone https://github.com/frankolson/electron-gpg.git
-cd electron-gpg
+git clone https://github.com/frankolson/electron-pgp.git
+cd electron-pgp
 yarn
 yarn start
 ```

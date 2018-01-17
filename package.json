@@ -1,5 +1,5 @@
 {
-  "name": "electron-gpg",
+  "name": "electron-pgp",
   "version": "0.1.0",
   "private": true,
   "description": "An app for working with GnuPG.",
@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome": "^1.1.2",
     "@fortawesome/fontawesome-free-solid": "^5.0.4",
     "@fortawesome/react-fontawesome": "^0.0.17",
+    "openpgp": "^2.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",

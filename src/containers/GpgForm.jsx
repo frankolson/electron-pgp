@@ -64,7 +64,7 @@ class GpgForm extends Component {
           </FormGroup>
 
           <FormGroup>
-            <Button type="button">Generate GPG Keys</Button>
+            <Button type="button">Generate PGP Keys</Button>
           </FormGroup>
 
           <FormGroup>
