@@ -64,6 +64,15 @@ class GpgForm extends Component {
           </FormGroup>
 
           <FormGroup>
+            <Label for="passphrase">Passphrase</Label>
+            <Input
+              type="password"
+              id="passphrase"
+              placeholder="Enter your passphrase here"
+            />
+          </FormGroup>
+
+          <FormGroup>
             <Button type="button">Generate PGP Keys</Button>
           </FormGroup>
 
