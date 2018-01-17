@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+// Project Assets
+import GpgForm from './GpgForm'
+
 const GenerateKeyPairContainer = styled.div`
-  text-align: center;
   padding: 20px;
 `
 
@@ -11,7 +13,7 @@ class GenerateKeyPair extends Component {
   render() {
     return (
       <GenerateKeyPairContainer>
-        Gunna do stuff here.
+        <GpgForm />
       </GenerateKeyPairContainer>
     );
   }

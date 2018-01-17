@@ -1,7 +1,6 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 // Electron
 const electron = window.require('electron');
