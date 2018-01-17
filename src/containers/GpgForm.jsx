@@ -1,6 +1,11 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/fontawesome-free-solid';
+
+// Project Assets
+import * as pgp from '../utils/pgp';
 
 const GpgFormContainer = styled.div`
   max-width: 800px;
@@ -43,10 +48,27 @@ const TextArea = styled.textarea`
 class GpgForm extends Component {
   state = {
     email: '',
+    loading: false,
     name: '',
     passphrase: '',
     privateKey: '',
     publicKey: '',
+  }
+
+  generateKey = () => {
+    const { email, name, passphrase } = this.state;
+
+    this.setState({
+      loading: true
+    })
+
+    pgp.generateKey(email, name, passphrase).then((keys) => {
+      this.setState({
+        loading: false,
+        privateKey: keys.privKey,
+        publicKey: keys.pubKey,
+      })
+    })
   }
 
   updateField = (field, value) => (
@@ -56,7 +78,10 @@ class GpgForm extends Component {
   )
 
   render() {
-    const { email, name, passphrase, privateKey, publicKey } = this.state;
+    const {
+      email, loading, name, passphrase, privateKey, publicKey
+    } = this.state;
+
     return (
       <GpgFormContainer>
         <ul className="flex-outer">
@@ -96,8 +121,14 @@ class GpgForm extends Component {
           <FormGroup>
             <Button
               type="button"
+              onClick={this.generateKey}
+              disabled={loading}
             >
-              Generate PGP Keys
+              {loading ? (
+                <FontAwesomeIcon icon={faSpinner} spin />
+              ): (
+                'Generate PGP Keys'
+              )}
             </Button>
           </FormGroup>
 
