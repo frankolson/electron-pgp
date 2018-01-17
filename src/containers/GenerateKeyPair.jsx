@@ -1,10 +1,10 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const GenerateKeyPairContainer = styled.div`
   text-align: center;
+  padding: 20px;
 `
 
 class GenerateKeyPair extends Component {
@@ -12,10 +12,6 @@ class GenerateKeyPair extends Component {
     return (
       <GenerateKeyPairContainer>
         Gunna do stuff here.
-
-        <br /><br />
-
-        <Link to="/">Home</Link>
       </GenerateKeyPairContainer>
     );
   }

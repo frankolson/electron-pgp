@@ -1,11 +1,12 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import { injectGlobal } from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 import { Route } from 'react-router-dom';
 
-// Electron
+// Project Assets
 import Home from './containers/Home';
 import GenerateKeyPair from './containers/GenerateKeyPair';
+import Navigation from './containers/Navigation';
 
 injectGlobal`
   body {
@@ -15,13 +16,35 @@ injectGlobal`
   }
 `
 
+const AppContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+`
+
+const Nav = styled.nav`
+  width: 60px;
+  height: auto;
+  background-color: #222;
+`
+
+const Main = styled.main`
+  flex: 1;
+`
+
 class App extends Component {
   render() {
     return (
-      <div>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/newKey" component={GenerateKeyPair}/>
-      </div>
+      <AppContainer>
+        <Nav>
+          <Navigation />
+        </Nav>
+
+        <Main>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/newKey" component={GenerateKeyPair}/>
+        </Main>
+      </AppContainer>
     );
   }
 }

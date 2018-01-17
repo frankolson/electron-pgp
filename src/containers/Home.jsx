@@ -10,13 +10,11 @@ const fs = remote.require('fs'); // eslint-disable-line no-unused-vars
 
 const HomeContainer = styled.div`
   text-align: center;
+  padding: 20px;
 `
 
 const Header = styled.header`
-  background-color: #222;
   height: 80px;
-  padding: 20px;
-  color: white;
 `
 
 const Title = styled.h1`
@@ -43,10 +41,6 @@ class Home extends Component {
           We are using node {remote.process.versions.node},
           Chrome {remote.process.versions.chrome},
           and Electron {remote.process.versions.electron}.
-
-          <br /><br />
-
-          <Link to="/newKey">Generate a Key Pair</Link>
         </Intro>
       </HomeContainer>
     );
