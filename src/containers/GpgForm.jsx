@@ -41,56 +41,85 @@ const TextArea = styled.textarea`
 `
 
 class GpgForm extends Component {
+  state = {
+    email: '',
+    name: '',
+    passphrase: '',
+    privateKey: '',
+    publicKey: '',
+  }
+
+  updateField = (field, value) => (
+    this.setState({
+      [field]: value,
+    })
+  )
+
   render() {
+    const { email, name, passphrase, privateKey, publicKey } = this.state;
     return (
       <GpgFormContainer>
         <ul className="flex-outer">
           <FormGroup>
             <Label for="name">Name</Label>
             <Input
+              onChange={e => this.updateField("name", e.target.value)}
               type="text"
               id="name"
               placeholder="Enter your name here"
+              value={name}
             />
           </FormGroup>
 
           <FormGroup>
             <Label for="email">Email</Label>
             <Input
+              onChange={e => this.updateField("email", e.target.value)}
               type="email"
               id="email"
               placeholder="Enter your email here"
+              value={email}
             />
           </FormGroup>
 
           <FormGroup>
             <Label for="passphrase">Passphrase</Label>
             <Input
+              onChange={e => this.updateField("passphrase", e.target.value)}
               type="password"
               id="passphrase"
               placeholder="Enter your passphrase here"
+              value={passphrase}
             />
           </FormGroup>
 
           <FormGroup>
-            <Button type="button">Generate PGP Keys</Button>
+            <Button
+              type="button"
+            >
+              Generate PGP Keys
+            </Button>
           </FormGroup>
 
           <FormGroup>
             <Label for="public-key">Public Key</Label>
             <TextArea
+              onChange={e => this.updateField("publicKey", e.target.value)}
               rows="6"
               id="public-key"
               placeholder="Your future public key"
+              value={publicKey}
             ></TextArea>
           </FormGroup>
 
           <FormGroup>
             <Label for="private-key">Private Key</Label>
             <TextArea
+              onChange={e => this.updateField("privateKey", e.target.value)}
               rows="6"
               id="private-key"
               placeholder="Your future private key"
+              value={privateKey}
             ></TextArea>
           </FormGroup>
         </ul>
