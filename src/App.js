@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 
 // Electron
 import Home from './containers/Home';
+import GenerateKeyPair from './containers/GenerateKeyPair';
 
 injectGlobal`
   body {
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={Home}/>
+        <Route exact path="/newKey" component={GenerateKeyPair}/>
       </div>
     );
   }

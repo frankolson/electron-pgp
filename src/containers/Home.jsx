@@ -1,6 +1,7 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 // Electron
 const electron = window.require('electron');
@@ -39,13 +40,13 @@ class Home extends Component {
         </Header>
 
         <Intro>
-          To get started, edit <code>src/containers/Home.js</code> and save to reload.
-
-          <br /><br />
-
           We are using node {remote.process.versions.node},
           Chrome {remote.process.versions.chrome},
           and Electron {remote.process.versions.electron}.
+
+          <br /><br />
+
+          <Link to="/newKey">Generate a Key Pair</Link>
         </Intro>
       </HomeContainer>
     );
