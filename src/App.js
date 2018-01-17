@@ -1,24 +1,48 @@
 // Vendor Assets
 import React, { Component } from 'react';
-
-// Project Assets
-import logo from './logo.svg';
-import './App.css';
+import styled, { injectGlobal } from 'styled-components';
 
 // Electron
 const electron = window.require('electron');
 const remote = electron.remote;
 const fs = remote.require('fs');
 
+injectGlobal`
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+`
+
+const AppContainer = styled.div`
+  text-align: center;
+`
+
+const Header = styled.header`
+  background-color: #222;
+  height: 80px;
+  padding: 20px;
+  color: white;
+`
+
+const Title = styled.h1`
+  font-size: 1.5em;
+`
+
+const Intro = styled.p`
+  font-size: large;
+`
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
+      <AppContainer>
+        <Header>
+          <Title>Welcome to ElectronGPG</Title>
+        </Header>
+
+        <Intro>
           To get started, edit <code>src/App.js</code> and save to reload.
 
           <br /><br />
@@ -26,8 +50,8 @@ class App extends Component {
           We are using node {remote.process.versions.node},
           Chrome {remote.process.versions.chrome},
           and Electron {remote.process.versions.electron}.
-        </p>
-      </div>
+        </Intro>
+      </AppContainer>
     );
   }
 }
