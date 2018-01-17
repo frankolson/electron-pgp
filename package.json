@@ -2,7 +2,7 @@
   "name": "electron-pgp",
   "version": "0.1.0",
   "private": true,
-  "description": "An app for working with GnuPG.",
+  "description": "An app for working with PGP.",
   "author": "Will Olson <will.olson11@gmail.com>",
   "license": "MIT",
   "main": "src/electron-starter.js",
