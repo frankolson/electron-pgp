@@ -8,63 +8,69 @@ import { faSpinner } from '@fortawesome/fontawesome-free-solid';
 import * as pgp from '../utils/pgp';
 
 const GpgFormContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-`
-
-const FormGroup = styled.li`
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 20px;
+  flex: 1;
+  flex-direction: column;
 `
 
-const Label = styled.label`
-  flex: 1 0 120px;
-  max-width: 220px;
+const FormGroup = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+
+  > label {
+    display: flex;
+    flex: 1;
+  }
+
+  > input {
+    display: flex;
+    flex: 2;
+  }
 `
 
-const Input = styled.input`
-  flex: 1 0 220px;
-  padding: 15px;
+const ButtonGroup = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
 `
 
-const Button = styled.button`
-  margin: auto;
-  padding: 8px 16px;
-  border: none;
-  background: #222;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: .09em;
-  border-radius: 2px;
+const Results = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
 `
 
-const TextArea = styled.textarea`
-  flex: 1 0 220px;
-  padding: 10px;
+const Result = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 10px;
 `
 
 class GpgForm extends Component {
   state = {
     email: '',
-    loading: false,
+    generating: false,
+    keypairName: '',
     name: '',
     passphrase: '',
     privateKey: '',
     publicKey: '',
+    saving: false,
   }
 
   generateKey = () => {
     const { email, name, passphrase } = this.state;
 
     this.setState({
-      loading: true
+      generating: true
     })
 
     pgp.generateKey(email, name, passphrase).then((keys) => {
       this.setState({
-        loading: false,
+        generating: false,
         privateKey: keys.privKey,
         publicKey: keys.pubKey,
       })
@@ -79,81 +85,104 @@ class GpgForm extends Component {
 
   render() {
     const {
-      email, loading, name, passphrase, privateKey, publicKey
+      email, generating, keypairName, name, passphrase, privateKey, publicKey,
+      saving,
     } = this.state;
 
     return (
       <GpgFormContainer>
-        <ul className="flex-outer">
-          <FormGroup>
-            <Label for="name">Name</Label>
-            <Input
-              onChange={e => this.updateField("name", e.target.value)}
-              type="text"
-              id="name"
-              placeholder="Enter your name here"
-              value={name}
-            />
-          </FormGroup>
+        <FormGroup>
+          <label>Keypair Name</label>
 
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
-              onChange={e => this.updateField("email", e.target.value)}
-              type="email"
-              id="email"
-              placeholder="Enter your email here"
-              value={email}
-            />
-          </FormGroup>
+          <input
+            onChange={e => this.updateField('keypairName', e.target.value)}
+            type="text"
+            placeholder="Enter the name of the keypair here"
+            value={keypairName}
+          />
+        </FormGroup>
 
-          <FormGroup>
-            <Label for="passphrase">Passphrase</Label>
-            <Input
-              onChange={e => this.updateField("passphrase", e.target.value)}
-              type="password"
-              id="passphrase"
-              placeholder="Enter your passphrase here"
-              value={passphrase}
-            />
-          </FormGroup>
+        <FormGroup>
+          <label>Your Name</label>
 
-          <FormGroup>
-            <Button
-              type="button"
-              onClick={this.generateKey}
-              disabled={loading}
-            >
-              {loading ? (
-                <FontAwesomeIcon icon={faSpinner} spin />
-              ): (
-                'Generate PGP Keys'
-              )}
-            </Button>
-          </FormGroup>
+          <input
+            onChange={e => this.updateField('name', e.target.value)}
+            type="text"
+            placeholder="Enter your name here"
+            value={name}
+          />
+        </FormGroup>
 
-          <FormGroup>
-            <Label for="public-key">Public Key</Label>
-            <TextArea
-              onChange={e => this.updateField("publicKey", e.target.value)}
+        <FormGroup>
+          <label>Email</label>
+
+          <input
+            onChange={e => this.updateField('email', e.target.value)}
+            type="email"
+            placeholder="Enter your email here"
+            value={email}
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <label>Passphrase</label>
+
+          <input
+            onChange={e => this.updateField('passphrase', e.target.value)}
+            type="text"
+            placeholder="Super secret passphrase here"
+            value={passphrase}
+          />
+        </FormGroup>
+
+        <ButtonGroup>
+          <button
+            type="button"
+            onClick={this.generateKey}
+            disabled={generating}
+          >
+            {generating ? (
+              <FontAwesomeIcon icon={faSpinner} spin />
+            ): (
+              'Generate PGP Keys'
+            )}
+          </button>
+
+          <button
+            type="button"
+            disabled={!(privateKey.length && publicKey.length)}
+          >
+            {saving ? (
+              <FontAwesomeIcon icon={faSpinner} spin />
+            ): (
+              'Generate PGP Keys'
+            )}
+          </button>
+        </ButtonGroup>
+
+        <Results>
+          <Result>
+            <label>Private Key</label>
+
+            <textarea
+              onChange={e => this.updateField('privateKey', e.target.value)}
               rows="6"
-              id="public-key"
-              placeholder="Your future public key"
-              value={publicKey}
-            ></TextArea>
-          </FormGroup>
-
-          <FormGroup>
-            <Label for="private-key">Private Key</Label>
-            <TextArea
-              onChange={e => this.updateField("privateKey", e.target.value)}
-              rows="6"
-              id="private-key"
               placeholder="Your future private key"
               value={privateKey}
-            ></TextArea>
-          </FormGroup>
-        </ul>
+            ></textarea>
+          </Result>
+
+          <Result>
+            <label>Public Key</label>
+
+            <textarea
+              onChange={e => this.updateField('publicKey', e.target.value)}
+              rows="6"
+              placeholder="Your future public key"
+              value={publicKey}
+            ></textarea>
+          </Result>
+        </Results>
       </GpgFormContainer>
     );
   }
