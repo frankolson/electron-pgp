@@ -1,8 +1,6 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/fontawesome-free-solid';
 
 // Project Assets
 import * as pgp from '../utils/pgp';
@@ -142,7 +140,7 @@ class GpgForm extends Component {
             disabled={generating}
           >
             {generating ? (
-              <FontAwesomeIcon icon={faSpinner} spin />
+              'loading...'
             ): (
               'Generate PGP Keys'
             )}
@@ -153,7 +151,7 @@ class GpgForm extends Component {
             disabled={!(privateKey.length && publicKey.length)}
           >
             {saving ? (
-              <FontAwesomeIcon icon={faSpinner} spin />
+              'saving...'
             ): (
               'Generate PGP Keys'
             )}

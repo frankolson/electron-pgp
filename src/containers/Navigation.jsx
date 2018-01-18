@@ -1,35 +1,44 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import { faHome, faPlusSquare } from '@fortawesome/fontawesome-free-solid';
-
-const NavigationContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
-const NavLink = styled(Link)`
-  color: white;
-  margin-top: 40px;
-`
+import { Layout, Menu, Icon } from 'antd';
 
 class Navigation extends Component {
+  state = {
+    collapsed: false,
+  };
+
+  onCollapse = (collapsed) => {
+    this.setState({
+      collapsed,
+    });
+  }
+
   render() {
     return (
-      <NavigationContainer>
-        <NavLink to="/">
-          <FontAwesome icon={faHome} size="2x" />
-        </NavLink>
+      <Layout.Sider
+        collapsible
+        collapsed={this.state.collapsed}
+        onCollapse={this.onCollapse}
+      >
+        <div className="logo" />
 
-        <NavLink to="/newKey">
-          <FontAwesome icon={faPlusSquare} size="2x" />
-        </NavLink>
-      </NavigationContainer>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu.Item key="1">
+            <Link to="/">
+              <Icon type="home" />
+              <span>Home</span>
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key="2">
+            <Link to="/newKey">
+              <Icon type="key" />
+              <span>Generate Key</span>
+            </Link>
+          </Menu.Item>
+        </Menu>
+      </Layout.Sider>
     );
   }
 }

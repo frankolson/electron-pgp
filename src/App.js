@@ -1,7 +1,8 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import styled, { injectGlobal } from 'styled-components';
+import { injectGlobal } from 'styled-components';
 import { Route } from 'react-router-dom';
+import { Layout } from 'antd';
 
 // Project Assets
 import Home from './containers/Home';
@@ -16,35 +17,20 @@ injectGlobal`
   }
 `
 
-const AppContainer = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-`
-
-const Nav = styled.nav`
-  width: 60px;
-  height: auto;
-  background-color: #222;
-`
-
-const Main = styled.main`
-  flex: 1;
-`
-
 class App extends Component {
   render() {
     return (
-      <AppContainer>
-        <Nav>
-          <Navigation />
-        </Nav>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Navigation />
 
-        <Main>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/newKey" component={GenerateKeyPair}/>
-        </Main>
-      </AppContainer>
+        <Layout>
+          <Layout.Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+            <Route exact path="/" component={Home}/>
+
+            <Route exact path="/newKey" component={GenerateKeyPair}/>
+          </Layout.Content>
+        </Layout>
+      </Layout>
     );
   }
 }
