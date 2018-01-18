@@ -1,50 +1,14 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { Button, Col, Form, Input, Row } from 'antd';
 
 // Project Assets
 import * as pgp from '../utils/pgp';
 
-const GpgFormContainer = styled.div`
+const ButtonCol = styled(Col)`
   display: flex;
-  flex: 1;
-  flex-direction: column;
-`
-
-const FormGroup = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-
-  > label {
-    display: flex;
-    flex: 1;
-  }
-
-  > input {
-    display: flex;
-    flex: 2;
-  }
-`
-
-const ButtonGroup = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-around;
-`
-
-const Results = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-`
-
-const Result = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin: 10px;
+  justify-content: center;
 `
 
 class GpgForm extends Component {
@@ -88,100 +52,112 @@ class GpgForm extends Component {
     } = this.state;
 
     return (
-      <GpgFormContainer>
-        <FormGroup>
-          <label>Keypair Name</label>
+      <Row>
+        <Input.Group>
+          <Col span={12}>
+            <Input
+              onChange={e => this.updateField('keypairName', e.target.value)}
+              type="text"
+              placeholder="Enter the name of the keypair here"
+              value={keypairName}
+            />
+          </Col>
 
-          <input
-            onChange={e => this.updateField('keypairName', e.target.value)}
-            type="text"
-            placeholder="Enter the name of the keypair here"
-            value={keypairName}
-          />
-        </FormGroup>
+          <Col span={12}>
+            <Input
+              onChange={e => this.updateField('name', e.target.value)}
+              type="text"
+              placeholder="Enter your name here"
+              value={name}
+            />
+          </Col>
+        </Input.Group>
 
-        <FormGroup>
-          <label>Your Name</label>
+        <br />
 
-          <input
-            onChange={e => this.updateField('name', e.target.value)}
-            type="text"
-            placeholder="Enter your name here"
-            value={name}
-          />
-        </FormGroup>
+        <Input.Group>
+          <Col span={12}>
+            <Input
+              onChange={e => this.updateField('email', e.target.value)}
+              type="text"
+              placeholder="Enter your email here"
+              value={email}
+            />
+          </Col>
 
-        <FormGroup>
-          <label>Email</label>
+          <Col span={12}>
+            <Input
+              onChange={e => this.updateField('passphrase', e.target.value)}
+              type="password"
+              placeholder="Super secret passphrase here"
+              value={passphrase}
+            />
+          </Col>
+        </Input.Group>
 
-          <input
-            onChange={e => this.updateField('email', e.target.value)}
-            type="email"
-            placeholder="Enter your email here"
-            value={email}
-          />
-        </FormGroup>
+        <br />
 
-        <FormGroup>
-          <label>Passphrase</label>
+        <Input.Group>
+          <ButtonCol span={24}>
+            <Button
+              type="primary"
+              icon="key"
+              loading={generating}
+              onClick={this.generateKey}
+            >
+              Generate PGP Keys
+            </Button>
+          </ButtonCol>
+        </Input.Group>
 
-          <input
-            onChange={e => this.updateField('passphrase', e.target.value)}
-            type="text"
-            placeholder="Super secret passphrase here"
-            value={passphrase}
-          />
-        </FormGroup>
+        <br />
 
-        <ButtonGroup>
-          <button
-            type="button"
-            onClick={this.generateKey}
-            disabled={generating}
-          >
-            {generating ? (
-              'loading...'
-            ): (
-              'Generate PGP Keys'
-            )}
-          </button>
+        <Input.Group>
+          <Col span={12}>
+            <Form.Item
+              label="Private Key"
+              formLayout="horizontal"
+            >
+              <Input.TextArea
+                onChange={e => this.updateField('privateKey', e.target.value)}
+                rows="6"
+                placeholder="Your future private key"
+                value={privateKey}
+              />
+          </Form.Item>
+          </Col>
 
-          <button
-            type="button"
-            disabled={!(privateKey.length && publicKey.length)}
-          >
-            {saving ? (
-              'saving...'
-            ): (
-              'Generate PGP Keys'
-            )}
-          </button>
-        </ButtonGroup>
+          <Col span={12}>
+            <Form.Item
+              label="Private Key"
+              formLayout="horizontal"
+            >
+              <Input.TextArea
+                onChange={e => this.updateField('publicKey', e.target.value)}
+                rows="6"
+                placeholder="Your future public key"
+                value={publicKey}
+              />
+            </Form.Item>
+          </Col>
+        </Input.Group>
 
-        <Results>
-          <Result>
-            <label>Private Key</label>
+        <br />
 
-            <textarea
-              onChange={e => this.updateField('privateKey', e.target.value)}
-              rows="6"
-              placeholder="Your future private key"
-              value={privateKey}
-            ></textarea>
-          </Result>
-
-          <Result>
-            <label>Public Key</label>
-
-            <textarea
-              onChange={e => this.updateField('publicKey', e.target.value)}
-              rows="6"
-              placeholder="Your future public key"
-              value={publicKey}
-            ></textarea>
-          </Result>
-        </Results>
-      </GpgFormContainer>
+        <Input.Group>
+          <ButtonCol span={24}>
+            <Button
+              type="primary"
+              icon="save"
+              loading={saving}
+              onClick={this.generateKey}
+              disabled={!(privateKey.length && publicKey.length)}
+            >
+              Save PGP Keypair
+            </Button>
+          </ButtonCol>
+        </Input.Group>
+      </Row>
     );
   }
 }
